@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e9">
+  <meta name="description" content="Deepak Kambala's open source contributions and projects.">
+  <title>Deepak Kambala</title>
+  <link rel="canonical" href="https://deepak-kambala.github.io/">
+  <meta property="og:url" content="https://deepak-kambala.github.io/">
+  <link rel="icon" type="image/png" href="DK_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="intro-splash" aria-hidden="true"><img src="DK_logo.png" alt=""></div>
+  <div class="site-shell">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Deepak Kambala home"><img class="brand-logo" src="DK_logo.png" alt=""></a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#about">About</a><a href="#contributions">Open source</a><a href="#projects">Built &amp; Open Source</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle color theme">☾</button>
+  </header>
+  <main class="layout" id="top">
+    <section class="page-intro" id="about">
+      <div><p class="intro-role">Deepak Kambala</p><h1>Researcher.<br>Engineer.<br><span>Builder.</span></h1></div>
+      <div class="intro-copy"><p>Turns out reading other people's code is a pretty good way to learn. Here's some of what I've fixed, explored, and contributed back.</p><div class="intro-actions"><a class="intro-action" href="https://deepak-kambala.github.io/" target="_blank" rel="noreferrer"><span>View full profile</span></a><a class="intro-action" href="https://github.com/Deepak-Kambala" target="_blank" rel="noreferrer"><span>More of my work on GitHub</span></a></div></div>
+    </section>
+    <div class="content">
+      <section class="section" id="contributions">
+        <h2 class="section-title">Open source contributions</h2>
+        <article class="entry featured">
+          <span class="entry-number" aria-hidden="true"></span>
+          <div><span class="tag">uarray · SciPy ecosystem</span><h3>Getting a deprecation warning to point where it belongs</h3>
+            <p>I came across this while looking into a SciPy FFT backend test failure. The trail led to <code>uarray</code>, the library behind the backend dispatch involved. With <code>DeprecationWarning</code>s treated as errors, a warning associated with <code>skip_backend()</code> was being reported from <code>set_backend()</code>, causing 46 test failures.</p>
+            <p>I fixed the warning attribution, adjusted its <code>stacklevel</code>, and added regression tests. The pull request was merged, and validation reported all 46 SciPy FFT backend tests passing with that warning configuration.</p>
+            <div class="links"><a href="https://github.com/Quansight-Labs/uarray/pull/339" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/scipy/scipy/issues/26476" target="_blank" rel="noreferrer">[Original SciPy issue]</a></div>
+          </div>
+        </article>
+        <article class="entry" id="hacktoberfest">
+          <span class="entry-number" aria-hidden="true"></span>
+          <div><span class="tag">Hacktoberfest 2025</span><h3>Helping make the first contribution easier</h3>
+            <p>During Hacktoberfest 2025, I contributed to 15+ ML-related repositories and helped maintain CupidScore and Romelette. I reviewed PRs, answered questions, and helped first-time contributors get unstuck. I got a T-shirt too, but the <a class="tree-link" href="https://tree-nation.com/trees/8234471/view" target="_blank" rel="noreferrer">amla tree planted for me in Tamil Nadu</a> was the real surprise. It's estimated to offset around 10 kg of CO₂ over its lifetime. </p>
+            <h4 class="project-heading">Projects I helped maintain</h4>
+            <div class="project-list">
+              <div class="project"><h5>CupidScore</h5><div class="project-links"><a href="https://github.com/Deepak-Kambala/CupidScore" target="_blank" rel="noreferrer">[Repository]</a><a href="https://github.com/Deepak-Kambala/CupidScore/pulls" target="_blank" rel="noreferrer">[Pull requests]</a></div></div>
+              <div class="project"><h5>Romelette</h5><div class="project-links"><a href="https://github.com/Deepak-Kambala/Romelette" target="_blank" rel="noreferrer">[Repository]</a><a href="https://github.com/Deepak-Kambala/Romelette/pulls" target="_blank" rel="noreferrer">[Pull requests]</a></div></div>
+            </div>
+          </div>
+        </article>
+      </section>
+      <section class="section" id="projects">
+        <h2 class="section-title">Built &amp; Open Source</h2>
+        <article class="entry">
+          <span class="entry-number" aria-hidden="true"></span>
+          <div><span class="tag">Developer tools</span><h3>Smart Code Assistant CLI</h3>
+            <p>I built this during a hackathon. It uses a local Ollama model to explain, debug, test, and optimize Python code. It's published on PyPI and available to try.</p>
+            <div class="links"><a href="https://github.com/Deepak-Kambala/Smart-Code-Assistant-CLI" target="_blank" rel="noreferrer">[GitHub]</a><a href="https://pypi.org/project/smart-code-assistant/" target="_blank" rel="noreferrer">[PyPI]</a></div>
+          </div>
+        </article>
+      </section>
+      <footer class="footer"><span>Deepak Kambala · 2026</span><a href="#top">Back to top</a></footer>
+    </div>
+  </main>
+  </div>
+  <script src="script.js" defer></script>
+</body>
+</html>
