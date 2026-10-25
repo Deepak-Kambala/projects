@@ -65,6 +65,16 @@
             </div>
           </div>
         </article>
+        <article class="entry">
+          <span class="entry-number" aria-hidden="true"></span>
+          <div><h3><a class="repo-link" href="https://github.com/scipy/scipy" target="_blank" rel="noreferrer">scipy/scipy</a></h3>
+            <p class="repo-summary">Fundamental algorithms for scientific computing in Python.</p>
+            <h4 class="pr-title">Detect singular RBF systems with identical augmented rows</h4>
+            <p>Fixed an edge case in <code>RBFInterpolator</code> where LAPACK could report success for a singular system and silently return incorrect interpolation results. The fix detects identical rows in the augmented system before solving and raises a clear error instead.</p>
+            <p>Added a regression test for the reproducer. The check is deliberately limited to this identical-row failure mode, avoiding condition-number cutoffs that would reject valid interpolation cases.</p>
+            <div class="links"><a href="https://github.com/scipy/scipy/pull/26480" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/scipy/scipy/issues/26475" target="_blank" rel="noreferrer">[Issue]</a></div>
+          </div>
+        </article>
         <article class="entry" id="hacktoberfest">
           <span class="entry-number" aria-hidden="true"></span>
           <div><h3>Hacktoberfest 2025</h3>
