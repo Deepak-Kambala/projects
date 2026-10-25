@@ -40,6 +40,14 @@
             <div class="links"><a href="https://github.com/Quansight-Labs/uarray/pull/339" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/scipy/scipy/issues/26476" target="_blank" rel="noreferrer">[Original SciPy issue]</a></div>
           </div>
         </article>
+        <article class="entry">
+          <span class="entry-number" aria-hidden="true"></span>
+          <div><span class="tag">rea · Binary inspection</span><h3>Accepting alignment padding in PE certificates</h3>
+            <p><code>inspect-pe-certificates</code> rejected some valid PE32 and PE32+ certificates when the declared <code>WIN_CERTIFICATE.dwLength</code> included the zero-filled padding required to align entries. That padding was being treated as part of the PKCS#7 payload, so structural inspection failed.</p>
+            <p>I updated the parser to end the CMS payload at its ASN.1 boundary and accept only zero bytes that fill the exact alignment gap. The original artifact and certificate-entry range stay intact, while the reported CMS range and hash exclude padding. Regression coverage exercises padding and malformed trailing data. Focused parser, CLI, and MCP tests passed, as did local type, lint, and fast CI checks.</p>
+            <div class="links"><a href="https://github.com/morluto/rea/pull/6721" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/morluto/rea/issues/6694" target="_blank" rel="noreferrer">[Issue]</a></div>
+          </div>
+        </article>
         <article class="entry" id="hacktoberfest">
           <span class="entry-number" aria-hidden="true"></span>
           <div><span class="tag">Hacktoberfest 2025</span><h3>Helping make the first contribution easier</h3>
