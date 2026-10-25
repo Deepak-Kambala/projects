@@ -34,7 +34,9 @@
         <h2 class="section-title">Open source contributions</h2>
         <article class="entry featured">
           <span class="entry-number" aria-hidden="true"></span>
-          <div><span class="tag">uarray · SciPy ecosystem</span><h3>Getting a deprecation warning to point where it belongs</h3>
+          <div><h3><a class="repo-link" href="https://github.com/Quansight-Labs/uarray" target="_blank" rel="noreferrer">Quansight-Labs/uarray</a></h3>
+            <p class="repo-summary">A Python library for flexible dispatch and backend overrides, used across the scientific Python ecosystem.</p>
+            <h4 class="pr-title">Fix the warning location for <code>skip_backend()</code></h4>
             <p>I came across this while looking into a SciPy FFT backend test failure. The trail led to <code>uarray</code>, the library behind the backend dispatch involved. With <code>DeprecationWarning</code>s treated as errors, a warning associated with <code>skip_backend()</code> was being reported from <code>set_backend()</code>, causing 46 test failures.</p>
             <p>I fixed the warning attribution, adjusted its <code>stacklevel</code>, and added regression tests. The pull request was merged, and validation reported all 46 SciPy FFT backend tests passing with that warning configuration.</p>
             <div class="links"><a href="https://github.com/Quansight-Labs/uarray/pull/339" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/scipy/scipy/issues/26476" target="_blank" rel="noreferrer">[Original SciPy issue]</a></div>
@@ -42,15 +44,30 @@
         </article>
         <article class="entry">
           <span class="entry-number" aria-hidden="true"></span>
-          <div><span class="tag">rea · Binary inspection</span><h3>Accepting alignment padding in PE certificates</h3>
-            <p><code>inspect-pe-certificates</code> rejected some valid PE32 and PE32+ certificates when the declared <code>WIN_CERTIFICATE.dwLength</code> included the zero-filled padding required to align entries. That padding was being treated as part of the PKCS#7 payload, so structural inspection failed.</p>
-            <p>I updated the parser to end the CMS payload at its ASN.1 boundary and accept only zero bytes that fill the exact alignment gap. The original artifact and certificate-entry range stay intact, while the reported CMS range and hash exclude padding. Regression coverage exercises padding and malformed trailing data. Focused parser, CLI, and MCP tests passed, as did local type, lint, and fast CI checks.</p>
-            <div class="links"><a href="https://github.com/morluto/rea/pull/6721" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/morluto/rea/issues/6694" target="_blank" rel="noreferrer">[Issue]</a></div>
+          <div class="repo-card"><h3><a class="repo-link" href="https://github.com/morluto/rea" target="_blank" rel="noreferrer">morluto/rea</a></h3>
+            <p class="repo-summary">An open source toolkit that helps AI agents reverse engineer software, from application behavior to native binaries.</p>
+            <div class="contribution-list">
+              <section class="contribution-item">
+                <h4>fix(pe): accept WIN_CERTIFICATE padding counted in dwLength</h4>
+                <p>Fixed certificate inspection for valid PE32 and PE32+ files whose <code>WIN_CERTIFICATE.dwLength</code> includes alignment padding. The parser now ends the CMS payload at its ASN.1 boundary and accepts only zero-filled bytes needed for alignment.</p>
+                <div class="links"><a href="https://github.com/morluto/rea/pull/6721" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/morluto/rea/issues/6694" target="_blank" rel="noreferrer">[Issue]</a></div>
+              </section>
+              <section class="contribution-item">
+                <h4>feat(workflows): expose guided prompts through CLI and MCP</h4>
+                <p>Made REA’s existing guided investigation workflows available to clients that cannot use native MCP prompts. The CLI command and provider-free MCP tool can list workflows and render their guidance using the same contracts, without starting an analysis or interacting with a target.</p>
+                <div class="links"><a href="https://github.com/morluto/rea/pull/6995" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/morluto/rea/issues/6918" target="_blank" rel="noreferrer">[Issue]</a></div>
+              </section>
+              <section class="contribution-item">
+                <h4>feat(guidance): search bundled REA workflow guidance</h4>
+                <p>Added CLI and MCP search and retrieval for REA’s installed workflow guides. Analysts can search by question, see ranked matching sections, and retrieve a full section from a bundle-bound locator. Results are clearly identified as documentation, not analysis evidence.</p>
+                <div class="links"><a href="https://github.com/morluto/rea/pull/6996" target="_blank" rel="noreferrer">[Pull request]</a><a href="https://github.com/morluto/rea/issues/6916" target="_blank" rel="noreferrer">[Issue]</a></div>
+              </section>
+            </div>
           </div>
         </article>
         <article class="entry" id="hacktoberfest">
           <span class="entry-number" aria-hidden="true"></span>
-          <div><span class="tag">Hacktoberfest 2025</span><h3>Helping make the first contribution easier</h3>
+          <div><h3>Hacktoberfest 2025</h3>
             <p>During Hacktoberfest 2025, I contributed to 15+ ML-related repositories and helped maintain CupidScore and Romelette. I reviewed PRs, answered questions, and helped first-time contributors get unstuck. I got a T-shirt too, but the <a class="tree-link" href="https://tree-nation.com/trees/8234471/view" target="_blank" rel="noreferrer">amla tree planted for me in Tamil Nadu</a> was the real surprise. It's estimated to offset around 10 kg of CO₂ over its lifetime. </p>
             <h4 class="project-heading">Projects I helped maintain</h4>
             <div class="project-list">
