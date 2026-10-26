@@ -114,20 +114,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   text-transform: uppercase;
   white-space: nowrap;
 }
-.nav a::after {
-  position: absolute;
-  right: 0;
-  bottom: -9px;
-  left: 0;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
-  content: '';
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .25s ease;
-}
-.nav a:hover::after, .nav a.active::after { transform: scaleX(1); }
 .nav a:hover, .nav a.active { color: var(--ink); }
 .nav::-webkit-scrollbar { display: none; }
 .theme-toggle {
