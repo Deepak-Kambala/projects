@@ -150,28 +150,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .theme-toggle.wavy .theme-icon {
   animation: theme-icon-wave 0.65s cubic-bezier(0.2, 0.8, 0.25, 1);
 }
-.theme-waves {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-.theme-wave-ring {
-  position: absolute;
-  inset: -1px;
-  border-radius: 50%;
-  border: 2px solid var(--accent);
-  opacity: 0.9;
-  pointer-events: none;
-  animation: theme-wave-ripple 0.75s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
-}
-.theme-wave-ring:nth-child(2) {
-  animation-delay: 0.12s;
-}
-.theme-wave-ring:nth-child(3) {
-  animation-delay: 0.24s;
-}
 
 @keyframes theme-button-wave {
   0% { transform: scale(1) rotate(0deg); }
@@ -188,20 +166,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   50% { transform: scale(1.22) rotate(26deg); }
   75% { transform: scale(0.92) rotate(-12deg); }
   100% { transform: scale(1) rotate(0deg); }
-}
-
-@keyframes theme-wave-ripple {
-  0% {
-    transform: scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    opacity: 0.45;
-  }
-  100% {
-    transform: scale(2.6);
-    opacity: 0;
-  }
 }
 
 /* Circular wave transition across viewports supporting View Transition API */

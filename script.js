@@ -23,19 +23,6 @@ const triggerToggleWave = () => {
   themeToggle.classList.remove('wavy');
   void themeToggle.offsetWidth;
   themeToggle.classList.add('wavy');
-
-  let wavesContainer = themeToggle.querySelector('.theme-waves');
-  if (!wavesContainer) {
-    wavesContainer = document.createElement('span');
-    wavesContainer.className = 'theme-waves';
-    wavesContainer.setAttribute('aria-hidden', 'true');
-    themeToggle.appendChild(wavesContainer);
-  }
-  wavesContainer.innerHTML = `
-    <span class="theme-wave-ring"></span>
-    <span class="theme-wave-ring"></span>
-    <span class="theme-wave-ring"></span>
-  `;
 };
 
 if (themeToggle) {
