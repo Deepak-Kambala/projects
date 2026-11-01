@@ -15,7 +15,35 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+}
+
+/* Custom scrollbar on the right */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent) 70%, transparent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background .2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  background-clip: padding-box;
+}
 body {
   margin: 0;
   color: var(--ink);
