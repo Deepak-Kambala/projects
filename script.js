@@ -35,7 +35,7 @@ const observer = new IntersectionObserver((entries) => {
 
 sections.forEach((section) => observer.observe(section));
 
-// Gallery Carousel
+// Gallery Carousel (Infinite Circular Loop)
 const galleryTrack = document.getElementById('gallery-track');
 const galleryPrevBtn = document.getElementById('gallery-prev');
 const galleryNextBtn = document.getElementById('gallery-next');
@@ -46,62 +46,163 @@ if (galleryTrack && galleryPrevBtn && galleryNextBtn) {
   const cards = Array.from(galleryTrack.querySelectorAll('.gallery-card'));
   const ITEMS_PER_PAGE = 6;
   const pageCount = Math.ceil(cards.length / ITEMS_PER_PAGE) || 1;
-  let currentPage = 0;
 
-  // Organize cards into pages of exactly 6 items
-  galleryTrack.innerHTML = '';
+  // Build logical pages
+  const pages = [];
   for (let i = 0; i < pageCount; i++) {
     const page = document.createElement('div');
     page.className = 'gallery-page';
+    page.setAttribute('role', 'group');
+    page.setAttribute('aria-label', `Page ${i + 1} of ${pageCount}`);
     cards.slice(i * ITEMS_PER_PAGE, (i + 1) * ITEMS_PER_PAGE).forEach((card) => {
       page.appendChild(card);
     });
-    galleryTrack.appendChild(page);
+    pages.push(page);
   }
 
-  const updateCarousel = () => {
-    galleryTrack.style.transform = `translateX(-${currentPage * 100}%)`;
-    if (galleryIndicator) {
-      galleryIndicator.textContent = `${currentPage + 1} / ${pageCount}`;
-    }
-    galleryPrevBtn.disabled = currentPage === 0;
-    galleryNextBtn.disabled = currentPage >= pageCount - 1;
+  galleryTrack.innerHTML = '';
+
+  let currentIndex = 0;
+  let isAnimating = false;
+  let animationTimeout = null;
+
+  if (pageCount > 1) {
+    // Clone last page to prepend and first page to append for seamless infinite looping
+    const firstClone = pages[0].cloneNode(true);
+    const lastClone = pages[pageCount - 1].cloneNode(true);
+
+    firstClone.classList.add('gallery-page-clone');
+    lastClone.classList.add('gallery-page-clone');
+    firstClone.setAttribute('aria-hidden', 'true');
+    lastClone.setAttribute('aria-hidden', 'true');
+
+    // Remove tabindex from clones so keyboard tab navigation only focuses real cards
+    [firstClone, lastClone].forEach((clone) => {
+      clone.querySelectorAll('[tabindex]').forEach((el) => {
+        el.setAttribute('tabindex', '-1');
+      });
+    });
+
+    galleryTrack.appendChild(lastClone);
+    pages.forEach((page) => galleryTrack.appendChild(page));
+    galleryTrack.appendChild(firstClone);
+
+    // Initial position is index 1 (the first real page)
+    currentIndex = 1;
+    galleryPrevBtn.disabled = false;
+    galleryNextBtn.disabled = false;
+  } else {
+    pages.forEach((page) => galleryTrack.appendChild(page));
+    currentIndex = 0;
+    galleryPrevBtn.disabled = true;
+    galleryNextBtn.disabled = true;
+  }
+
+  const getDisplayPage = (index) => {
+    if (pageCount <= 1) return 1;
+    if (index === 0) return pageCount;
+    if (index === pageCount + 1) return 1;
+    return index;
   };
 
-  galleryPrevBtn.addEventListener('click', () => {
-    if (currentPage > 0) {
-      currentPage--;
-      updateCarousel();
+  const updateIndicator = () => {
+    if (galleryIndicator) {
+      galleryIndicator.textContent = `${getDisplayPage(currentIndex)} / ${pageCount}`;
     }
+  };
+
+  const setPosition = (index, animate = true) => {
+    if (animate) {
+      galleryTrack.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+    } else {
+      galleryTrack.style.transition = 'none';
+    }
+    galleryTrack.style.transform = `translateX(-${index * 100}%)`;
+    if (!animate) {
+      void galleryTrack.offsetHeight; // Force reflow
+    }
+  };
+
+  const resetAfterAnimation = () => {
+    if (pageCount > 1) {
+      if (currentIndex >= pageCount + 1) {
+        currentIndex = 1;
+        setPosition(currentIndex, false);
+      } else if (currentIndex <= 0) {
+        currentIndex = pageCount;
+        setPosition(currentIndex, false);
+      }
+    }
+    isAnimating = false;
+  };
+
+  galleryTrack.addEventListener('transitionend', (e) => {
+    if (e.target !== galleryTrack || e.propertyName !== 'transform') return;
+    clearTimeout(animationTimeout);
+    resetAfterAnimation();
   });
 
-  galleryNextBtn.addEventListener('click', () => {
-    if (currentPage < pageCount - 1) {
-      currentPage++;
-      updateCarousel();
-    }
-  });
+  const goToNext = () => {
+    if (pageCount <= 1 || isAnimating) return;
+    isAnimating = true;
+    currentIndex++;
+    updateIndicator();
+    setPosition(currentIndex, true);
+    clearTimeout(animationTimeout);
+    animationTimeout = setTimeout(resetAfterAnimation, 500);
+  };
+
+  const goToPrev = () => {
+    if (pageCount <= 1 || isAnimating) return;
+    isAnimating = true;
+    currentIndex--;
+    updateIndicator();
+    setPosition(currentIndex, true);
+    clearTimeout(animationTimeout);
+    animationTimeout = setTimeout(resetAfterAnimation, 500);
+  };
+
+  galleryPrevBtn.addEventListener('click', goToPrev);
+  galleryNextBtn.addEventListener('click', goToNext);
+
+  // Initialize track position without animation
+  setPosition(currentIndex, false);
+  updateIndicator();
 
   // Touch swipe support for mobile
   let touchStartX = 0;
-  galleryTrack.addEventListener('touchstart', (e) => {
+  let touchStartY = 0;
+  let isSwiping = false;
+
+  galleryViewport.addEventListener('touchstart', (e) => {
+    if (isAnimating) return;
     touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+    isSwiping = true;
   }, { passive: true });
 
-  galleryTrack.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0 && currentPage < pageCount - 1) {
-        currentPage++;
-        updateCarousel();
-      } else if (diff < 0 && currentPage > 0) {
-        currentPage--;
-        updateCarousel();
+  galleryViewport.addEventListener('touchend', (e) => {
+    if (!isSwiping || isAnimating) return;
+    isSwiping = false;
+    const diffX = touchStartX - e.changedTouches[0].clientX;
+    const diffY = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) {
+        goToNext();
+      } else {
+        goToPrev();
       }
     }
   }, { passive: true });
 
-  updateCarousel();
+  // Arrow key navigation when gallery viewport has focus
+  galleryViewport.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      goToPrev();
+    } else if (e.key === 'ArrowRight') {
+      goToNext();
+    }
+  });
 }
 
 // Gallery Lightbox
