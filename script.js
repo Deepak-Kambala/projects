@@ -1,18 +1,94 @@
 const themeToggle = document.querySelector('.theme-toggle');
+const themeIcon = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
 const savedTheme = localStorage.getItem('deepak-theme');
+
+const setToggleState = (isDark) => {
+  if (themeIcon) {
+    themeIcon.textContent = isDark ? '☀' : '☾';
+  } else if (themeToggle) {
+    themeToggle.textContent = isDark ? '☀' : '☾';
+  }
+  if (themeToggle) {
+    themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+};
 
 if (savedTheme === 'dark') {
   document.body.classList.add('dark');
-  themeToggle.textContent = '☀';
-  themeToggle.setAttribute('aria-label', 'Switch to light mode');
+  setToggleState(true);
 }
 
-themeToggle.addEventListener('click', () => {
-  const isDark = document.body.classList.toggle('dark');
-  localStorage.setItem('deepak-theme', isDark ? 'dark' : 'light');
-  themeToggle.textContent = isDark ? '☀' : '☾';
-  themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-});
+const triggerToggleWave = () => {
+  if (!themeToggle) return;
+  themeToggle.classList.remove('wavy');
+  void themeToggle.offsetWidth;
+  themeToggle.classList.add('wavy');
+
+  let wavesContainer = themeToggle.querySelector('.theme-waves');
+  if (!wavesContainer) {
+    wavesContainer = document.createElement('span');
+    wavesContainer.className = 'theme-waves';
+    wavesContainer.setAttribute('aria-hidden', 'true');
+    themeToggle.appendChild(wavesContainer);
+  }
+  wavesContainer.innerHTML = `
+    <span class="theme-wave-ring"></span>
+    <span class="theme-wave-ring"></span>
+    <span class="theme-wave-ring"></span>
+  `;
+};
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('dark');
+    const nextTheme = !isDark;
+
+    triggerToggleWave();
+
+    const applyTheme = () => {
+      document.body.classList.toggle('dark', nextTheme);
+      localStorage.setItem('deepak-theme', nextTheme ? 'dark' : 'light');
+      setToggleState(nextTheme);
+    };
+
+    if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      applyTheme();
+      return;
+    }
+
+    const rect = themeToggle.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    try {
+      const transition = document.startViewTransition(() => {
+        applyTheme();
+      });
+
+      transition.ready.then(() => {
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`
+            ]
+          },
+          {
+            duration: 550,
+            easing: 'cubic-bezier(0.2, 0.8, 0.25, 1)',
+            pseudoElement: '::view-transition-new(root)'
+          }
+        );
+      }).catch(() => {});
+    } catch {
+      applyTheme();
+    }
+  });
+}
 
 const navLinks = [...document.querySelectorAll('.nav a')];
 const sections = [...document.querySelectorAll('.content .section, .page-intro, #hacktoberfest')];
