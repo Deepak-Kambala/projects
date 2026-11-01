@@ -49,68 +49,87 @@
         </article>
       </section>
       <section class="section" id="gallery">
-        <h2 class="section-title">Gallery</h2>
-        <div class="gallery-grid">
-          <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: Winner, Square Hacks 2025 (IIT Delhi)">
-            <div class="gallery-image-wrap">
-              <img src="photos/1767196178348.jpeg" alt="Winner, Square Hacks 2025 at IIT Delhi" loading="lazy">
+        <div class="gallery-header">
+          <h2 class="section-title">Gallery</h2>
+          <span class="gallery-indicator" id="gallery-indicator" aria-live="polite">1 / 1</span>
+        </div>
+        <div class="gallery-carousel">
+          <button class="gallery-nav-btn prev" id="gallery-prev" aria-label="Previous photos" type="button" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="gallery-viewport" id="gallery-viewport">
+            <div class="gallery-track" id="gallery-track">
+              <div class="gallery-page">
+                <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: Winner, Square Hacks 2025 (IIT Delhi)">
+                  <div class="gallery-image-wrap">
+                    <img src="photos/1767196178348.jpeg" alt="Winner, Square Hacks 2025 at IIT Delhi" loading="lazy">
+                  </div>
+                  <figcaption class="gallery-caption">
+                    <span class="gallery-tag">Winner · IIT Delhi</span>
+                    <h3 class="gallery-title">Winner, Square Hacks 2025 (IIT Delhi)</h3>
+                    <p class="gallery-desc">National AI hackathon for rural India, organized at IIT Delhi.</p>
+                  </figcaption>
+                </figure>
+                <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: Runner-Up, SysML 2.0 Hackathon (IISc Bengaluru)">
+                  <div class="gallery-image-wrap">
+                    <img src="photos/1782804075506.jpeg" alt="Runner-Up, SysML 2.0 Hackathon at IISc Bengaluru" loading="lazy">
+                  </div>
+                  <figcaption class="gallery-caption">
+                    <span class="gallery-tag">Hackathon · IISc Bengaluru</span>
+                    <h3 class="gallery-title">Runner-Up, SysML 2.0 Hackathon</h3>
+                    <p class="gallery-desc">IISc ACM Student Chapter hackathon at IISc Bengaluru.</p>
+                  </figcaption>
+                </figure>
+                <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: National Finalist, Blueprint at IIT Delhi">
+                  <div class="gallery-image-wrap">
+                    <img src="photos/1770300381528.jpeg" alt="National Finalist, Blueprint Finale at IIT Delhi" loading="lazy">
+                  </div>
+                  <figcaption class="gallery-caption">
+                    <span class="gallery-tag">Pitch Finale · IIT Delhi</span>
+                    <h3 class="gallery-title">National Finalist, Blueprint</h3>
+                    <p class="gallery-desc">Top 8 finalist nationwide, pitching at the IIT Delhi Grand Finale.</p>
+                  </figcaption>
+                </figure>
+                <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: National Student Change Initiatives Fest 2026">
+                  <div class="gallery-image-wrap">
+                    <img src="photos/1774880607656.jpeg" alt="National Student Change Initiatives Fest 2026 at EMPI New Delhi" loading="lazy">
+                  </div>
+                  <figcaption class="gallery-caption">
+                    <span class="gallery-tag">Summit · New Delhi</span>
+                    <h3 class="gallery-title">NSCIF 2026 Showcase</h3>
+                    <p class="gallery-desc">Showcasing AI solutions at EMPI, Chhatarpur, New Delhi.</p>
+                  </figcaption>
+                </figure>
+                <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: The Integral Cup 2026 Developer Feature">
+                  <div class="gallery-image-wrap">
+                    <img src="photos/WhatsApp%20Image%202026-10-27%20at%2018.53.08.jpeg" alt="Deepak Kambala featured as Website Developer on The Integral Cup 2026" loading="lazy">
+                  </div>
+                  <figcaption class="gallery-caption">
+                    <span class="gallery-tag">Web Development</span>
+                    <h3 class="gallery-title">The Integral Cup 2026</h3>
+                    <p class="gallery-desc">Featured as Website Developer on the official competition platform.</p>
+                  </figcaption>
+                </figure>
+                <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: Met Addonmo cofounder">
+                  <div class="gallery-image-wrap">
+                    <img src="photos/1756609816101.jpeg" alt="Met Addonmo cofounder" loading="lazy">
+                  </div>
+                  <figcaption class="gallery-caption">
+                    <span class="gallery-tag">Meetup · Networking</span>
+                    <h3 class="gallery-title">Met Addonmo Cofounder</h3>
+                    <p class="gallery-desc">Connecting with the cofounder of Addonmo.</p>
+                  </figcaption>
+                </figure>
+              </div>
             </div>
-            <figcaption class="gallery-caption">
-              <span class="gallery-tag">Winner · IIT Delhi</span>
-              <h3 class="gallery-title">Winner, Square Hacks 2025 (IIT Delhi)</h3>
-              <p class="gallery-desc">National AI hackathon for rural India, organized at IIT Delhi.</p>
-            </figcaption>
-          </figure>
-          <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: Runner-Up, SysML 2.0 Hackathon (IISc Bengaluru)">
-            <div class="gallery-image-wrap">
-              <img src="photos/1782804075506.jpeg" alt="Runner-Up, SysML 2.0 Hackathon at IISc Bengaluru" loading="lazy">
-            </div>
-            <figcaption class="gallery-caption">
-              <span class="gallery-tag">Hackathon · IISc Bengaluru</span>
-              <h3 class="gallery-title">Runner-Up, SysML 2.0 Hackathon</h3>
-              <p class="gallery-desc">IISc ACM Student Chapter hackathon at IISc Bengaluru.</p>
-            </figcaption>
-          </figure>
-          <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: National Finalist, Blueprint at IIT Delhi">
-            <div class="gallery-image-wrap">
-              <img src="photos/1770300381528.jpeg" alt="National Finalist, Blueprint Finale at IIT Delhi" loading="lazy">
-            </div>
-            <figcaption class="gallery-caption">
-              <span class="gallery-tag">Pitch Finale · IIT Delhi</span>
-              <h3 class="gallery-title">National Finalist, Blueprint</h3>
-              <p class="gallery-desc">Top 8 finalist nationwide, pitching at the IIT Delhi Grand Finale.</p>
-            </figcaption>
-          </figure>
-          <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: National Student Change Initiatives Fest 2026">
-            <div class="gallery-image-wrap">
-              <img src="photos/1774880607656.jpeg" alt="National Student Change Initiatives Fest 2026 at EMPI New Delhi" loading="lazy">
-            </div>
-            <figcaption class="gallery-caption">
-              <span class="gallery-tag">Summit · New Delhi</span>
-              <h3 class="gallery-title">NSCIF 2026 Showcase</h3>
-              <p class="gallery-desc">Showcasing AI solutions at EMPI, Chhatarpur, New Delhi.</p>
-            </figcaption>
-          </figure>
-          <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: The Integral Cup 2026 Developer Feature">
-            <div class="gallery-image-wrap">
-              <img src="photos/WhatsApp%20Image%202026-10-27%20at%2018.53.08.jpeg" alt="Deepak Kambala featured as Website Developer on The Integral Cup 2026" loading="lazy">
-            </div>
-            <figcaption class="gallery-caption">
-              <span class="gallery-tag">Web Development</span>
-              <h3 class="gallery-title">The Integral Cup 2026</h3>
-              <p class="gallery-desc">Featured as Website Developer on the official competition platform.</p>
-            </figcaption>
-          </figure>
-          <figure class="gallery-card" tabindex="0" role="button" aria-label="View photo: Met Addonmo cofounder">
-            <div class="gallery-image-wrap">
-              <img src="photos/1756609816101.jpeg" alt="Met Addonmo cofounder" loading="lazy">
-            </div>
-            <figcaption class="gallery-caption">
-              <span class="gallery-tag">Meetup · Networking</span>
-              <h3 class="gallery-title">Met Addonmo Cofounder</h3>
-              <p class="gallery-desc">Connecting with the cofounder of Addonmo.</p>
-            </figcaption>
-          </figure>
+          </div>
+          <button class="gallery-nav-btn next" id="gallery-next" aria-label="Next photos" type="button" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
         </div>
       </section>
       <section class="section" id="contributions">
