@@ -162,12 +162,92 @@ if (galleryTrack && galleryPrevBtn && galleryNextBtn) {
     animationTimeout = setTimeout(resetAfterAnimation, 500);
   };
 
-  galleryPrevBtn.addEventListener('click', goToPrev);
-  galleryNextBtn.addEventListener('click', goToNext);
+  galleryPrevBtn.addEventListener('click', () => {
+    goToPrev();
+    restartAutoMove();
+  });
+
+  galleryNextBtn.addEventListener('click', () => {
+    goToNext();
+    restartAutoMove();
+  });
 
   // Initialize track position without animation
   setPosition(currentIndex, false);
   updateIndicator();
+
+  // Auto-move every 10 seconds
+  const AUTO_MOVE_DELAY = 10000;
+  let autoMoveTimer = null;
+  let isHovered = false;
+
+  const isLightboxActive = () => {
+    const lb = document.getElementById('gallery-lightbox');
+    return lb && lb.classList.contains('active');
+  };
+
+  const startAutoMove = () => {
+    stopAutoMove();
+    if (pageCount <= 1) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (document.hidden || isHovered || isLightboxActive()) return;
+
+    autoMoveTimer = setTimeout(() => {
+      goToNext();
+      startAutoMove();
+    }, AUTO_MOVE_DELAY);
+  };
+
+  const stopAutoMove = () => {
+    if (autoMoveTimer) {
+      clearTimeout(autoMoveTimer);
+      autoMoveTimer = null;
+    }
+  };
+
+  const restartAutoMove = () => {
+    stopAutoMove();
+    startAutoMove();
+  };
+
+  const galleryCarousel = document.querySelector('.gallery-carousel');
+  if (galleryCarousel) {
+    galleryCarousel.addEventListener('mouseenter', () => {
+      isHovered = true;
+      stopAutoMove();
+    });
+
+    galleryCarousel.addEventListener('mouseleave', () => {
+      isHovered = false;
+      startAutoMove();
+    });
+
+    galleryCarousel.addEventListener('focusin', () => {
+      isHovered = true;
+      stopAutoMove();
+    });
+
+    galleryCarousel.addEventListener('focusout', (e) => {
+      if (!galleryCarousel.contains(e.relatedTarget)) {
+        isHovered = false;
+        startAutoMove();
+      }
+    });
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoMove();
+    } else {
+      startAutoMove();
+    }
+  });
+
+  // Start auto-move
+  startAutoMove();
+
+  // Expose hooks for lightbox to pause/resume auto-move
+  window._galleryAutoMove = { start: startAutoMove, stop: stopAutoMove };
 
   // Touch swipe support for mobile
   let touchStartX = 0;
@@ -179,6 +259,7 @@ if (galleryTrack && galleryPrevBtn && galleryNextBtn) {
     touchStartX = e.changedTouches[0].clientX;
     touchStartY = e.changedTouches[0].clientY;
     isSwiping = true;
+    stopAutoMove();
   }, { passive: true });
 
   galleryViewport.addEventListener('touchend', (e) => {
@@ -193,14 +274,17 @@ if (galleryTrack && galleryPrevBtn && galleryNextBtn) {
         goToPrev();
       }
     }
+    restartAutoMove();
   }, { passive: true });
 
   // Arrow key navigation when gallery viewport has focus
   galleryViewport.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       goToPrev();
+      restartAutoMove();
     } else if (e.key === 'ArrowRight') {
       goToNext();
+      restartAutoMove();
     }
   });
 }
@@ -219,6 +303,7 @@ if (lightbox && galleryViewport) {
   const openLightbox = (card) => {
     const img = card.querySelector('img');
     if (!img) return;
+    if (window._galleryAutoMove) window._galleryAutoMove.stop();
     lastFocusedElement = card;
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt || '';
@@ -241,6 +326,7 @@ if (lightbox && galleryViewport) {
     if (lastFocusedElement) {
       lastFocusedElement.focus();
     }
+    if (window._galleryAutoMove) window._galleryAutoMove.start();
   };
 
   galleryViewport.addEventListener('click', (e) => {
