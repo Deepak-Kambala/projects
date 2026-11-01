@@ -284,31 +284,61 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   width: 100%;
 }
 .gallery-nav-btn {
+  position: relative;
   display: grid;
   place-items: center;
   width: 42px;
   height: 42px;
   padding: 0;
   flex: 0 0 42px;
+  overflow: hidden;
+  isolation: isolate;
   border: 1px solid var(--line);
   border-radius: 50%;
   background: var(--panel);
   color: var(--ink);
   cursor: pointer;
   user-select: none;
-  transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease, opacity .25s ease, box-shadow .25s ease;
+  transition: transform .28s cubic-bezier(.2, .8, .25, 1),
+              border-color .28s ease,
+              color .25s ease,
+              opacity .25s ease,
+              box-shadow .28s ease;
+}
+.gallery-nav-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: scale(0);
+  transition: transform .32s cubic-bezier(.2, .85, .25, 1);
+  z-index: -1;
 }
 .gallery-nav-btn svg {
   display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform .25s cubic-bezier(.2, .8, .25, 1);
 }
 .gallery-nav-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.06);
   border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: var(--shadow);
+  color: #fffaf2;
+  box-shadow: 0 10px 24px -4px color-mix(in srgb, var(--accent) 38%, transparent), var(--shadow);
+}
+.gallery-nav-btn:hover:not(:disabled)::before {
+  transform: scale(1);
+}
+.gallery-nav-btn.prev:hover:not(:disabled) svg {
+  transform: translateX(-3px);
+}
+.gallery-nav-btn.next:hover:not(:disabled) svg {
+  transform: translateX(3px);
 }
 .gallery-nav-btn:active:not(:disabled) {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.94);
+  transition-duration: .1s;
 }
 .gallery-nav-btn:disabled {
   opacity: 0.28;
