@@ -316,8 +316,46 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .entry code { padding: 2px 4px; color: var(--ink); background: rgba(32, 35, 33, .06); font: 11px var(--mono); }
 .tag { display: inline-block; margin: 0 0 10px; color: var(--muted); font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .links { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 12px; }
-.links a, .project-links a { color: var(--accent); font: 11px var(--mono); }
+.links a, .project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font: 11px var(--mono);
+}
 .links a:hover, .project-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.status-icon {
+  display: inline-block;
+  flex: 0 0 13px;
+  width: 13px;
+  height: 13px;
+  vertical-align: middle;
+  transition: transform .2s ease;
+}
+.links a:hover .status-icon,
+.project-links a:hover .status-icon {
+  transform: scale(1.15);
+}
+.status-icon.merged,
+.status-icon.closed {
+  color: #8250df;
+}
+.status-icon.open {
+  color: #1a7f37;
+}
+.status-icon.repo {
+  color: var(--muted);
+}
+body.dark .status-icon.merged,
+body.dark .status-icon.closed {
+  color: #a371f7;
+}
+body.dark .status-icon.open {
+  color: #3fb950;
+}
+body.dark .status-icon.repo {
+  color: var(--muted);
+}
 .tree-link {
   color: inherit;
   font-weight: inherit;
