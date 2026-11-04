@@ -467,6 +467,7 @@ body.dark .status-icon.repo {
 }
 .gallery-track {
   display: flex;
+  align-items: flex-start;
   width: 100%;
   transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
@@ -476,6 +477,7 @@ body.dark .status-icon.repo {
   min-width: 100%;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
   gap: 16px;
 }
 .gallery-card {
