@@ -293,6 +293,24 @@
             </div>
           </div>
         </article>
+        <article class="entry">
+          <span class="entry-number" aria-hidden="true"></span>
+          <div class="repo-card"><span class="tag">Organization Member · PassageMath</span><h3><a class="repo-link" href="https://github.com/passagemath/passagemath" target="_blank" rel="noreferrer">passagemath/passagemath</a></h3>
+            <p class="repo-summary">An open-source mathematical software system based on SageMath, providing tools for computational mathematics and scientific research.</p>
+            <div class="contribution-list">
+              <section class="contribution-item">
+                <h4>Rewrite <code>sage-get-system-packages</code> in Python</h4>
+                <p>Rewrote the system package detection utility from shell to Python as part of <code>passagemath-bootstrap</code>. Added support for multiple distributions and package managers, package resolution modes, PURL resolution, and robust environment detection. Added unit tests and addressed bootstrap compatibility issues involving package metadata parsing.</p>
+                <div class="links"><a href="https://github.com/passagemath/passagemath/pull/3017" target="_blank" rel="noreferrer" title="Merged Pull Request"><svg class="status-icon merged" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5.45 5.154A4.25 4.25 0 0 0 9.25 7.5h1.378a2.251 2.251 0 1 1 0 1.5H9.25A5.734 5.734 0 0 1 5 7.123v3.505a2.25 2.25 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.95-.218ZM4.25 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm8.5-4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM5 3.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>[Pull request]</a><a href="https://github.com/passagemath/passagemath/issues/2867" target="_blank" rel="noreferrer" title="Closed Issue"><svg class="status-icon closed" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"></path><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"></path></svg>[Issue]</a></div>
+              </section>
+              <section class="contribution-item">
+                <h4><code>sdh_pip_install</code>: Preserve build environments and support source distribution extraction</h4>
+                <p>Updated <code>sage-dist-helpers</code> to preserve isolated Python build environments when builds fail, making them available for debugging. Added <code>--env-dir</code> and <code>--sdist-extract-dir</code> options, integrated source distribution extraction into the wheel-building workflow, and added documentation and regression tests.</p>
+                <div class="links"><a href="https://github.com/passagemath/passagemath/pull/3016" target="_blank" rel="noreferrer" title="Merged Pull Request"><svg class="status-icon merged" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5.45 5.154A4.25 4.25 0 0 0 9.25 7.5h1.378a2.251 2.251 0 1 1 0 1.5H9.25A5.734 5.734 0 0 1 5 7.123v3.505a2.25 2.25 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.95-.218ZM4.25 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm8.5-4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM5 3.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>[Pull request]</a><a href="https://github.com/passagemath/passagemath/issues/2995" target="_blank" rel="noreferrer" title="Closed Issue"><svg class="status-icon closed" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"></path><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"></path></svg>[Issue]</a></div>
+              </section>
+            </div>
+          </div>
+        </article>
         <article class="entry" id="hacktoberfest">
           <span class="entry-number" aria-hidden="true"></span>
           <div><h3>Hacktoberfest 2025</h3>
