@@ -244,6 +244,16 @@ if (galleryTrack && galleryPrevBtn && galleryNextBtn) {
     isSwiping = true;
   }, { passive: true });
 
+  galleryViewport.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    const diffX = touchStartX - e.changedTouches[0].clientX;
+    const diffY = touchStartY - e.changedTouches[0].clientY;
+    // If user is predominantly scrolling vertically, immediately release swipe lock
+    if (Math.abs(diffY) > Math.abs(diffX)) {
+      isSwiping = false;
+    }
+  }, { passive: true });
+
   galleryViewport.addEventListener('touchend', (e) => {
     if (!isSwiping || isAnimating) return;
     isSwiping = false;
@@ -256,6 +266,10 @@ if (galleryTrack && galleryPrevBtn && galleryNextBtn) {
         goToPrev();
       }
     }
+  }, { passive: true });
+
+  galleryViewport.addEventListener('touchcancel', () => {
+    isSwiping = false;
   }, { passive: true });
 
   // Arrow key navigation when gallery viewport has focus

@@ -466,13 +466,15 @@ body.dark .status-icon.repo {
   overflow: hidden;
   padding: 10px 0;
   margin: -10px 0;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 .gallery-track {
   display: flex;
   align-items: flex-start;
   width: 100%;
   transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
+  touch-action: pan-y;
 }
 .gallery-page {
   flex: 0 0 100%;
@@ -481,6 +483,7 @@ body.dark .status-icon.repo {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-content: start;
   gap: 16px;
+  touch-action: pan-y;
 }
 .gallery-card {
   margin: 0;
@@ -492,6 +495,8 @@ body.dark .status-icon.repo {
   cursor: pointer;
   text-align: left;
   user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
   position: relative;
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
