@@ -250,16 +250,6 @@
         </article>
         <article class="entry">
           <span class="entry-number" aria-hidden="true"></span>
-          <div><h3><a class="repo-link" href="https://github.com/scipy/scipy" target="_blank" rel="noreferrer">scipy/scipy</a></h3>
-            <p class="repo-summary">Fundamental algorithms for scientific computing in Python.</p>
-            <h4 class="pr-title">Detect singular RBF systems with identical augmented rows</h4>
-            <p>Fixed an edge case in <code>RBFInterpolator</code> where LAPACK could report success for a singular system and silently return incorrect interpolation results. The fix detects identical rows in the augmented system before solving and raises a clear error instead.</p>
-            <p>Added a regression test for the reproducer. The check is deliberately limited to this identical-row failure mode, avoiding condition-number cutoffs that would reject valid interpolation cases.</p>
-            <div class="links"><a href="https://github.com/scipy/scipy/pull/26480" target="_blank" rel="noreferrer" title="Open Pull Request"><svg class="status-icon open" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1H10v1.646a.25.25 0 0 1-.427.177L7.177 3.227a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"></path></svg>[Pull request]</a><a href="https://github.com/scipy/scipy/issues/26475" target="_blank" rel="noreferrer" title="Open Issue"><svg class="status-icon open" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>[Issue]</a></div>
-          </div>
-        </article>
-        <article class="entry">
-          <span class="entry-number" aria-hidden="true"></span>
           <div><h3><a class="repo-link" href="https://github.com/topoteretes/cognee" target="_blank" rel="noreferrer">topoteretes/cognee</a></h3>
             <p class="repo-summary">An open-source framework for building knowledge engines that enable AI agents to retrieve and reason over data.</p>
             <h4 class="pr-title">fix(ingestion): Accept open file objects in <code>add()</code></h4>
