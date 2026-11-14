@@ -91,7 +91,13 @@ const observer = new IntersectionObserver((entries) => {
     if (active) link.setAttribute('aria-current', 'location');
     else link.removeAttribute('aria-current');
     if (active && !wasActive && window.matchMedia('(max-width: 800px)').matches) {
-      link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      const nav = link.closest('.nav');
+      if (nav) {
+        const navRect = nav.getBoundingClientRect();
+        const linkRect = link.getBoundingClientRect();
+        const linkCenter = linkRect.left - navRect.left + nav.scrollLeft + linkRect.width / 2;
+        nav.scrollTo({ left: linkCenter - nav.clientWidth / 2, behavior: 'smooth' });
+      }
     }
   });
 }, { rootMargin: '-25% 0px -65% 0px' });
