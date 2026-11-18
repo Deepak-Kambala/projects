@@ -356,13 +356,19 @@ body.dark .status-icon.open {
 body.dark .status-icon.repo {
   color: var(--muted);
 }
-.tree-link {
+.tree-link,
+.inline-link {
   color: inherit;
   font-weight: inherit;
   text-decoration: none;
   border-bottom: 1px solid var(--accent-soft);
+  transition: border-color .2s ease, color .2s ease;
 }
-.tree-link:hover { border-bottom-color: var(--accent); }
+.tree-link:hover,
+.inline-link:hover {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
 .project-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
 .project-heading { margin: 19px 0 0; font-size: 12px; letter-spacing: .04em; }
 .project {
